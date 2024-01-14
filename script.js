@@ -1,31 +1,44 @@
  // Масив слів для перекладу
-    let words = [
-        { word: 'Hello', translation: 'Привіт', word: 'always', translation: 'Завжди',  word: 'Goodbye', translation: 'До побачення' },{ word: 'Car', translation: 'машина'}, 
-		{ word: 'Home', translation: 'Будівля',  word: 'map', translation: 'дорожня карта',  word: 'House', translation: 'Будинок',  word: 'ship', translation: 'корабель',  word: 'Race', translation: 'гонка',  word: 'great', translation: 'добре'}
-       ];
-    let currentStep = 0;
-    let correctCount = 0;
-    let incorrectCount = 0;
-    // Перемішати слова випадковим чином
-    words = shuffleArray(words);
-    // Додати картки до контейнера
-    words.forEach(function (word, index) {
-        $('#cards-container').append('<div class="card" data-index="' + index + '">' + word.word + '</div>');
-    });
-    // Натискання на картку
-    $('.card').click(function () {
-        let index = $(this).data('index');
-        let translation = prompt('Введіть переклад слова: ' + words[index].word);
-        if (translation && translation.toLowerCase() === words[index].translation.toLowerCase()) {
-            alert('Правильно!');
-            correctCount++;
-        } else {
-            alert('Невірно. Правильний переклад: ' + words[index].translation);
-            incorrectCount++;
-        }
-        currentStep++;
-        updateProgress();
-    });
+   let words = [
+    { word: 'Hello', translation: 'Привіт' },
+    { word: 'always', translation: 'Завжди' },
+    { word: 'Goodbye', translation: 'До побачення' },
+    { word: 'Car', translation: 'машина' },
+    { word: 'Home', translation: 'Будівля' },
+    { word: 'map', translation: 'дорожня карта' },
+    { word: 'House', translation: 'Будинок' },
+    { word: 'ship', translation: 'корабель' },
+    { word: 'Race', translation: 'гонка' },
+    { word: 'great', translation: 'добре' }
+];
+
+let currentStep = 0;
+let correctCount = 0;
+let incorrectCount = 0;
+
+// Перемішати слова випадковим чином
+words = shuffleArray(words);
+
+// Додати картки до контейнера
+words.forEach(function (word, index) {
+    $('#cards-container').append('<div class="card" data-index="' + index + '">' + word.word + '</div>');
+});
+
+// Натискання на картку
+$('.card').click(function () {
+    let index = $(this).data('index');
+    let translation = prompt('Введіть переклад слова: ' + words[index].word);
+
+    if (translation && translation.toLowerCase() === words[index].translation.toLowerCase()) {
+        alert('Правильно!');
+        correctCount++;
+    } else {
+        alert('Невірно. Правильний переклад: ' + words[index].translation);
+        incorrectCount++;
+    }
+    currentStep++;
+    updateProgress();
+});
     // Перевірити результат
     $('#checkBtn').click(function () {
         let translation = $('#translation').val().trim().toLowerCase();
